@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="button" >
+        <!--<item name="android:shadowColor" >@color/colorBold</item>-->
+        <!--<item name="android:shadowDx" >1</item>-->
+        <!--<item name="android:shadowDy" >1</item>-->
+        <!--<item name="android:shadowRadius" >5</item>-->
+    </style>
 </resources>

@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNudg = new NudgProgram(new User("Malcolm"), MainActivity.this);
+        mNudg = new NudgProgram(MainActivity.this);
+        mNudg.setUser(MainActivity.this, "Chris");
         mWelcome = (TextView) findViewById(R.id.welcomer);
         mText = (Button) findViewById(R.id.text);
         mGoFilter = (Button) findViewById(R.id.goFilter);

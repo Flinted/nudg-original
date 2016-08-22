@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NUDG</string>
+    <string name="nudg">Nudg</string>
+    <string name="tag">Tags</string>
+    <string name="notes">Notes</string>
+
 </resources>

@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:focusableInTouchMode="true">
 
 
     <ImageView
@@ -31,15 +32,18 @@
         android:layout_below="@id/welcomer"
         android:minHeight="60dp"
         android:textSize="20dp"
+        android:layout_marginBottom="5dp"
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter your Nudg..."
-        android:background="@color/colorAccent"/>
+        android:background="@drawable/boxoutline"/>
 
     <Button
     android:id="@+id/text"
     android:text="Submit"
+        style="@style/button"
+        android:background="@drawable/button"
     android:layout_below="@id/autoComplete"
     android:layout_centerInParent="true"
     android:layout_width="150dp"
@@ -50,6 +54,8 @@
     <Button
         android:id="@+id/calendarGo"
         android:text="date"
+        style="@style/button"
+        android:background="@drawable/button"
         android:layout_below="@id/autoComplete"
         android:layout_toLeftOf="@id/text"
         android:layout_centerInParent="true"
@@ -61,6 +67,8 @@
     <Button
         android:id="@+id/imageGo"
         android:text="image"
+        style="@style/button"
+        android:background="@drawable/button"
         android:layout_below="@id/autoComplete"
         android:layout_toRightOf="@id/text"
         android:layout_centerInParent="true"
@@ -72,10 +80,12 @@
     <Button
         android:id="@+id/goFilter"
         android:text="View Nudgs"
+        style="@style/button"
+        android:background="@drawable/button"
         android:layout_below="@id/text"
         android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
-        android:layout_width="300dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:textAlignment="center"
@@ -86,6 +96,7 @@
         android:layout_height="250dp"
         android:layout_below="@id/goFilter"
         android:background="@color/colorAccent"
+        android:layout_centerInParent="true"
         />
     <DatePicker
         android:layout_width="wrap_content"

@@ -69,4 +69,16 @@ public class NudgManager {
             mNudgs = new ArrayList<NudgMaster>();
         }
     }
+
+    public NudgMaster findNudg(String text, String tags){
+        for(NudgMaster nudg : mNudgs){
+            if(nudg.getText().equalsIgnoreCase(text)){
+
+                if(tags.contains(nudg.getTags().get(0))){
+                    return nudg;
+                }
+            }
+        }
+        return null;
+    }
 }

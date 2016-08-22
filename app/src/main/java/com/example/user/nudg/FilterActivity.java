@@ -1,10 +1,12 @@
 package com.example.user.nudg;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -26,12 +28,12 @@ public class FilterActivity extends ListActivity {
         setContentView(R.layout.activity_filter);
         mList = (ListView) findViewById(android.R.id.list);
         mSearch = (SearchView) findViewById(R.id.searcher);
-
+        mSearch.setQueryHint("Click here to filter Nudgs");
+        mSearch.clearFocus();
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        String user = extras.getString("user");
-        mNudg = new NudgProgram(new User(user), FilterActivity.this);
+        mNudg = new NudgProgram(FilterActivity.this);
 
         mData = mNudg.getmNudger().getNudgs();
 
@@ -40,7 +42,12 @@ public class FilterActivity extends ListActivity {
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               Log.d("Clicked", mAdapter.getItem(position).getText());
+                NudgMaster nudg = mAdapter.getItem(position);
+                Intent intent = new Intent(FilterActivity.this, DisplayActivity.class);
+                intent.putExtra("tags", nudg.getTags().toString());
+                intent.putExtra("text", nudg.getText());
+                intent.putExtra("note",nudg.getNote().toString());
+                startActivity(intent);
             }
         });
 
@@ -57,4 +64,5 @@ public class FilterActivity extends ListActivity {
             }
         });
     }
+
 }
