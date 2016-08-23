@@ -37,16 +37,21 @@
         android:background="@drawable/button"
     android:layout_below="@id/autoComplete"
     android:layout_centerInParent="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
     android:layout_width="150dp"
     android:layout_height="50dp"
     android:textAlignment="center"
     />
 
-    <Button
+    <ImageButton
         android:id="@+id/calendarGo"
-        android:text="date"
         style="@style/button"
+        android:src="@drawable/calendar"
+        android:scaleType="fitCenter"
         android:background="@drawable/button"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
         android:layout_below="@id/autoComplete"
         android:layout_toLeftOf="@id/text"
         android:layout_centerInParent="true"
@@ -55,10 +60,13 @@
         android:textAlignment="center"
         />
 
-    <Button
+    <ImageButton
         android:id="@+id/imageGo"
-        android:text="image"
         style="@style/button"
+        android:src="@drawable/camera"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:scaleType="fitCenter"
         android:background="@drawable/button"
         android:layout_below="@id/autoComplete"
         android:layout_toRightOf="@id/text"

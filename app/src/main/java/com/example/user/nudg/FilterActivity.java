@@ -91,11 +91,13 @@ public class FilterActivity extends ListActivity {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.bottomMargin = 2;
             Button btn = new Button(this);
             btn.setId(i);
             final int id_ = btn.getId();
             btn.setText(mTags.get(i));
             btn.setTextSize(10);
+
             btn.setBackgroundResource(R.drawable.button);
             scroller.addView(btn, params);
             Button btn1 = ((Button) findViewById(id_));

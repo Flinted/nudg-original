@@ -21,6 +21,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
@@ -48,9 +49,9 @@ import javax.xml.validation.Validator;
 public class MainActivity extends AppCompatActivity{
     TextView mWelcome;
     Button mText;
-    Button mImage;
+    ImageButton mImage;
     Button mGoFilter;
-    Button mCalendarGo;
+    ImageButton mCalendarGo;
     ImageView mImageView;
     NudgProgram mNudg;
     DatePicker mDate;
@@ -75,11 +76,11 @@ public class MainActivity extends AppCompatActivity{
         mText = (Button) findViewById(R.id.text);
         mGoFilter = (Button) findViewById(R.id.goFilter);
         mAuto = (MultiAutoCompleteTextView) findViewById(R.id.autoComplete);
-        mCalendarGo = (Button) findViewById(R.id.calendarGo);
+        mCalendarGo = (ImageButton) findViewById(R.id.calendarGo);
         setAuto(mNudg.getmNudger());
         mWelcome.setText("Welcome back " + mNudg.getUserName());
 //        mDate = (DatePicker) findViewById(R.id.datePicker);
-        mImage = (Button) findViewById(R.id.imageGo);
+        mImage = (ImageButton) findViewById(R.id.imageGo);
 //        mImageView = (ImageView) findViewById(R.id.thumbnail);
         setTodayList();
         mImage.setOnClickListener(new View.OnClickListener() {
