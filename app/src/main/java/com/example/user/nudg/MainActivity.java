@@ -55,6 +55,11 @@ public class MainActivity extends AppCompatActivity{
     DatePicker mDate;
     MultiAutoCompleteTextView mAuto;
 
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        setAuto(mNudg.getmNudger());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -148,19 +153,22 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId() == R.id.action_shelf ){
+        if(item.getItemId() == R.id.menu_clear ){
             SharedPrefRunner.clear(this,"tags");
             SharedPrefRunner.clear(this,"nudgs");
 
             Toast.makeText(MainActivity.this, "ALL ITEMS CLEARED", Toast.LENGTH_SHORT).show();
             return true;
         }
-        if(item.getItemId() == R.id.action_lists ){
-            Toast.makeText(MainActivity.this,"temp",Toast.LENGTH_SHORT).show();
+        if(item.getItemId() == R.id.menu_home ){
+
+            Toast.makeText(MainActivity.this,"Already Home",Toast.LENGTH_SHORT).show();
             return true;
         }
-        if(item.getItemId() == R.id.action_options ){
-            Toast.makeText(MainActivity.this,"temp",Toast.LENGTH_SHORT).show();
+        if(item.getItemId() == R.id.menu_list ){
+            Toast.makeText(MainActivity.this,"Going to view Nudgs",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

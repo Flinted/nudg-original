@@ -52,7 +52,9 @@ public abstract class NudgMaster {
             mTags.add(dateTag);
             Log.d("SystemTag", dateTag);
         }
-
+        if (mTags.size() == 0){
+            mTags.add("#noTag");
+        }
         stripTags(mText);
     }
 
@@ -62,6 +64,30 @@ public abstract class NudgMaster {
             returner = returner + " " + tag;
         }
         return returner;
+    }
+    public void update(String newText, String newNote, String[] newTags){
+        updateText(newText);
+        updateNote(newNote);
+        updateTags(newTags);
+    }
+
+    public void updateText(String newText){
+        mText = newText;
+    }
+
+    public void updateTags(String[] newTags){
+           mTags.clear();
+            for (String tag : newTags){
+                mTags.add(tag);
+            }
+
+        if (mTags.size() == 0){
+            mTags.add("#noTag");
+        }
+    }
+    public void updateNote(String newNote){
+
+        mNote = newNote;
     }
 
     public void stripTags(String text){
@@ -134,10 +160,6 @@ public abstract class NudgMaster {
         return tags;
     }
 
-
-    public void updateNote(String newNote){
-        mNote = newNote;
-    }
 
     public String getText(){
         return mText;

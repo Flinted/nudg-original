@@ -38,12 +38,23 @@ public class NudgManager {
         save(context);
     }
 
+    public void delete(NudgMaster nudg, Context context){
+        mTagger.removeTags(nudg.getTags(), context);
+        mNudgs.remove(nudg);
+        save(context);
+    }
+
     public ArrayList<NudgMaster> getNudgs(){
         return mNudgs;
     }
 
+    public void removeTags(ArrayList<String> tags, Context context){
+        mTagger.removeTags(tags, context);
+    }
+
     public void newNudg(String text, String notes){
         mCurrentNudg = new TextNudg(text,notes);
+        mNudgs.add(mCurrentNudg);
     }
 
     public ArrayList<String> getTags(){
@@ -51,11 +62,13 @@ public class NudgManager {
     }
 
     public void save(Context context){
-        mNudgs.add(mCurrentNudg);
         String json = mGson.toJson(mNudgs);
         SharedPrefRunner.setStoredText("nudgs", context, json);
     }
 
+    public void processNewTags(ArrayList<String> newTags, Context context){
+        mTagger.process(newTags, context);
+    }
     public void checkStored(Context context){
         String jsonReturn = SharedPrefRunner.getStoredText("nudgs", context);
         if(jsonReturn != null) {
@@ -81,4 +94,18 @@ public class NudgManager {
         }
         return null;
     }
+//
+//    public void removeNudgByFind(NudgMaster nudgToRemove){
+//        String text = nudgToRemove.getText();
+//        String tags = nudgToRemove.getComparisonTags()
+//        for(int i=0; i<mNudgs.size();i++){
+//            if(mNudgs.get(i).getText().equalsIgnoreCase(text)){
+//
+//                if(tags.contains(mNudgs.get(i).getTags().get(0))){
+//                    mNudgs.remove(i);
+//                }
+//            }
+//        }
+//        return null;
+//    }
 }

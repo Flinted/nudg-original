@@ -10,10 +10,22 @@
     <SearchView
         android:id="@+id/searcher"
         android:layout_height="60dp"
-        android:layout_width="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_width="290dp"
         android:background="@drawable/boxoutline"
         android:hint="search"
         android:iconifiedByDefault="false"
+        />
+    <Button
+        android:layout_width="95dp"
+        android:layout_height="60dp"
+        android:layout_toLeftOf="@id/searcher"
+        style="@style/button"
+        android:background="@drawable/button"
+        android:text="Home"
+        android:textSize="20sp"
+        android:id="@+id/button_home"
+        android:layout_alignParentLeft="true"
         />
     <!--<MultiAutoCompleteTextView-->
         <!--android:id="@+id/searcher"-->

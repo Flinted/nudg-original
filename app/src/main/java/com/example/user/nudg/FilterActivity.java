@@ -5,12 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -32,7 +37,6 @@ public class FilterActivity extends ListActivity {
         mSearch.clearFocus();
 
         Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
         mNudg = new NudgProgram(FilterActivity.this);
 
         mData = mNudg.getmNudger().getNudgs();
@@ -63,6 +67,36 @@ public class FilterActivity extends ListActivity {
                 return false;
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.mainactivity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == R.id.menu_clear ){
+            SharedPrefRunner.clear(this,"tags");
+            SharedPrefRunner.clear(this,"nudgs");
+
+            Toast.makeText(FilterActivity.this, "ALL ITEMS CLEARED", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if(item.getItemId() == R.id.menu_home ){
+
+            Toast.makeText(FilterActivity.this,"Going to Home",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(FilterActivity.this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if(item.getItemId() == R.id.menu_list ){
+            Toast.makeText(FilterActivity.this,"Already viewing Nudgs",Toast.LENGTH_SHORT).show();
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

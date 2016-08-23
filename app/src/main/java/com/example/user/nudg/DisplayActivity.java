@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -62,20 +66,78 @@ public class DisplayActivity extends AppCompatActivity{
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                save();
             }
         });
         mDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                delete();
             }
         });
         mDiscard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                cancel();
             }
         });
+    }
+
+
+    public void save(){
+        String newText = TextField.getText().toString();
+        String newNote = NoteField.getText().toString();
+        String newTags = TagField.getText().toString();
+
+        String[] splitTags = newTags.split("\\|");
+        mNudgProgram.getmNudger().removeTags(mNudg.getTags(), DisplayActivity.this);
+        mNudg.update(newText, newNote, splitTags);
+        mNudgProgram.getmNudger().processNewTags(mNudg.getTags(), DisplayActivity.this);
+        mNudgProgram.getmNudger().save(DisplayActivity.this);
+        Intent intent = new Intent(DisplayActivity.this, FilterActivity.class);
+        startActivity(intent);
+    }
+
+    public void delete(){
+        mNudgProgram.getmNudger().delete(mNudg, DisplayActivity.this);
+        Intent intent = new Intent(DisplayActivity.this, FilterActivity.class);
+        startActivity(intent);
+    }
+
+    public void cancel(){
+        Intent intent = new Intent(DisplayActivity.this, FilterActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.mainactivity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == R.id.menu_clear ){
+            SharedPrefRunner.clear(this,"tags");
+            SharedPrefRunner.clear(this,"nudgs");
+
+            Toast.makeText(DisplayActivity.this, "ALL ITEMS CLEARED", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if(item.getItemId() == R.id.menu_home ){
+
+            Toast.makeText(DisplayActivity.this,"Going to Home",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(DisplayActivity.this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if(item.getItemId() == R.id.menu_list ){
+            Toast.makeText(DisplayActivity.this,"Going to View Nudgs",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(DisplayActivity.this, FilterActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

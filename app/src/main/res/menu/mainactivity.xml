@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_shelf"
-        android:title="Shelf (unsorted Nudg's)"/>
-    <item android:id="@+id/action_lists"
-        android:title="View Lists"/>
-    <item android:id="@+id/action_options"
-        android:title="Options"/>
+    <item android:id="@+id/menu_home"
+        android:title="Home"/>
+    <item android:id="@+id/menu_list"
+        android:title="View Nudgs"/>
+    <item android:id="@+id/menu_clear"
+        android:title="CLEAR ALL NUDGS!"/>
 </menu>
