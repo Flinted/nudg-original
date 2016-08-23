@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onRestart(){
         super.onRestart();
         setAuto(mNudg.getmNudger());
+        setTodayList();
     }
 
     @Override

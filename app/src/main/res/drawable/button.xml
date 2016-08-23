@@ -7,26 +7,29 @@
                 />
             <stroke
                 android:width="3dp"
-                android:color="@color/colorPrimary"
+                android:color="@color/colorText"
                 />
 
             <padding
                 android:top="0dp"
                 android:bottom="0dp" />
-
+            <corners
+                android:radius="10dp" />
         </shape>
     </item>
     <item>
         <shape>
             <solid
-                android:color="@color/colorPrimary"
+                android:color="@color/colorPrimaryTrans"
               />
             <stroke
-                android:width="3dp"
-                android:color="@color/colorPrimaryDark" />
+                android:width="2dp"
+                android:color="@color/colorText" />
             <padding
                 android:top="0dp"
                 android:bottom="0dp" />
+            <corners
+                android:radius="10dp" />
         </shape>
     </item>
 

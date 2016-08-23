@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/gradient"
     android:focusableInTouchMode="true">
 
 
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter your Nudg..."
-        android:background="@drawable/boxoutline"/>
+        android:background="@drawable/boxoutlineattentiongrab"/>
 
     <Button
     android:id="@+id/text"
@@ -83,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="260dp"
         android:layout_below="@id/todayTitle"
-        android:background="@color/colorAccent"
+        android:background="@drawable/boxoutline"
         />
 
     <Button

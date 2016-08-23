@@ -12,7 +12,7 @@ public class NudgProgram {
 
     public NudgProgram(Context context){
         mUser = "User";
-        Archive archive = new Archive();
+        Archive archive = new Archive(context);
         TagManager tagManager = new TagManager(context);
         mNudger =  new NudgManager(tagManager, archive, context);
         checkUser(context);

@@ -102,6 +102,10 @@ public class NudgManager {
         return null;
     }
 
+    public void archive(NudgMaster nudg, Context context){
+        mArchive.addToArchive(nudg, context);
+    }
+
     public ArrayList<NudgMaster> returnTodaysNudgs(){
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();

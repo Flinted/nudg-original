@@ -65,16 +65,21 @@ public abstract class NudgMaster {
         return returner;
     }
     public void update(String newText, String newNote, String[] newTags){
+        ArrayList<String> tags = new ArrayList<>();
+        for(String tag:newTags){
+            tags.add(tag);
+        }
+
         updateText(newText);
         updateNote(newNote);
-        updateTags(newTags);
+        updateTags(tags);
     }
 
     public void updateText(String newText){
         mText = newText;
     }
 
-    public void updateTags(String[] newTags){
+    public void updateTags(ArrayList<String> newTags){
            mTags.clear();
             for (String tag : newTags){
                 mTags.add(tag);

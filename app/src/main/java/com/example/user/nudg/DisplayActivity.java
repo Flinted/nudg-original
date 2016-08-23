@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 /**
  * Created by user on 22/08/2016.
  */
@@ -31,6 +33,7 @@ public class DisplayActivity extends AppCompatActivity{
     Button mSave;
     Button mDelete;
     Button mDiscard;
+    Button mDone;
 
 
     @Override
@@ -62,7 +65,7 @@ public class DisplayActivity extends AppCompatActivity{
         mSave = (Button) findViewById(R.id.button_save);
         mDelete= (Button) findViewById(R.id.button_delete);
         mDiscard = (Button) findViewById(R.id.button_discard);
-
+        mDone = (Button) findViewById(R.id.button_done);
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +82,12 @@ public class DisplayActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 cancel();
+            }
+        });
+        mDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                markDone();
             }
         });
     }
@@ -105,6 +114,19 @@ public class DisplayActivity extends AppCompatActivity{
     }
 
     public void cancel(){
+        Intent intent = new Intent(DisplayActivity.this, FilterActivity.class);
+        startActivity(intent);
+    }
+
+    public void markDone(){
+        NudgMaster toStore = mNudg;
+        mNudgProgram.getmNudger().delete(mNudg, DisplayActivity.this);
+
+        ArrayList<String> tags = toStore.getTags();
+        tags.add("#DONE!");
+        toStore.updateTags(tags);
+
+        mNudgProgram.getmNudger().archive(toStore, DisplayActivity.this);
         Intent intent = new Intent(DisplayActivity.this, FilterActivity.class);
         startActivity(intent);
     }

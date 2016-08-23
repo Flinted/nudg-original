@@ -3,7 +3,7 @@
     <item>
         <shape>
             <solid
-                android:color="@color/colorPrimary" />
+                android:color="@color/colorAccent" />
             <stroke
                 android:dashWidth="10px"
                 android:dashGap="10px"
