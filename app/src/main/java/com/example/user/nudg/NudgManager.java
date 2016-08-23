@@ -12,7 +12,10 @@ import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * Created by user on 18/08/2016.
@@ -83,6 +86,10 @@ public class NudgManager {
         }
     }
 
+    public ArrayList<String> getCleanedTags(){
+        return mTagger.getCleanedTags();
+    }
+
     public NudgMaster findNudg(String text, String tags){
         for(NudgMaster nudg : mNudgs){
             if(nudg.getText().equalsIgnoreCase(text)){
@@ -93,6 +100,23 @@ public class NudgManager {
             }
         }
         return null;
+    }
+
+    public ArrayList<NudgMaster> returnTodaysNudgs(){
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        calendar.setTime(date);
+        String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+        Integer day = calendar.get(Calendar.DATE);
+        String searchTerm =  "#" + day.toString() + month;
+
+        ArrayList<NudgMaster> returnList = new ArrayList<>();
+        for(NudgMaster nudg: mNudgs){
+            if(nudg.getTags().toString().contains(searchTerm)){
+                returnList.add(nudg);
+            }
+        }
+        return returnList;
     }
 //
 //    public void removeNudgByFind(NudgMaster nudgToRemove){

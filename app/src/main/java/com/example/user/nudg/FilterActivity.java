@@ -11,7 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Filter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -19,6 +21,8 @@ import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class FilterActivity extends ListActivity {
    private ArrayList<NudgMaster> mData;
@@ -26,6 +30,7 @@ public class FilterActivity extends ListActivity {
    private  NudgProgram mNudg;
    private ListView mList;
     private SearchView mSearch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +40,10 @@ public class FilterActivity extends ListActivity {
         mSearch = (SearchView) findViewById(R.id.searcher);
         mSearch.setQueryHint("Click here to filter Nudgs");
         mSearch.clearFocus();
-
         Intent intent = getIntent();
         mNudg = new NudgProgram(FilterActivity.this);
-
         mData = mNudg.getmNudger().getNudgs();
-
+        setButtons();
         mAdapter = new MyListAdapter(FilterActivity.this,mData);
         mList.setAdapter(mAdapter);
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,35 +71,55 @@ public class FilterActivity extends ListActivity {
             }
         });
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.mainactivity, menu);
-        return true;
+
+
+    public void setButtons(){
+        Button home = (Button) findViewById(R.id.button_home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FilterActivity.this, "Going to Home", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(FilterActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout scroller = (LinearLayout) findViewById(R.id.button_scroller);
+        ArrayList<String> mTags = mNudg.getmNudger().getCleanedTags();
+
+        for (int i = 0; i <= mTags.size()-1; i++) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            Button btn = new Button(this);
+            btn.setId(i);
+            final int id_ = btn.getId();
+            btn.setText(mTags.get(i));
+            btn.setTextSize(10);
+            btn.setBackgroundResource(R.drawable.button);
+            scroller.addView(btn, params);
+            Button btn1 = ((Button) findViewById(id_));
+            btn1.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    setSearchFromButton(view);
+                }
+            });
+        }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId() == R.id.menu_clear ){
-            SharedPrefRunner.clear(this,"tags");
-            SharedPrefRunner.clear(this,"nudgs");
+    public void setSearchFromButton(View view){
+        Button button = (Button) view;
+        String tag = button.getText().toString();
+        mSearch.setQuery(tag, true);
+    }
 
-            Toast.makeText(FilterActivity.this, "ALL ITEMS CLEARED", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if(item.getItemId() == R.id.menu_home ){
-
-            Toast.makeText(FilterActivity.this,"Going to Home",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(FilterActivity.this, MainActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        if(item.getItemId() == R.id.menu_list ){
-            Toast.makeText(FilterActivity.this,"Already viewing Nudgs",Toast.LENGTH_SHORT).show();
-
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public void setSearchFromDefaultButton(View view){
+        NudgMaster tempNudg = new TextNudg("Temp","temp");
+        Button button = (Button) view;
+        Log.d("Default Clicked", button.getText().toString());
+        String textToSet = tempNudg.dateCheck(button.getText().toString().substring(2));
+        Log.d("dateCheck", textToSet);
+        mSearch.setQuery(textToSet, true);
     }
 
 }

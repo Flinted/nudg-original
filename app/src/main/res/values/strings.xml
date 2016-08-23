@@ -3,5 +3,7 @@
     <string name="nudg">Nudg</string>
     <string name="tag">Tags</string>
     <string name="notes">Notes</string>
+    <string name="todayTitle">Today\'s Nudgs</string>
+
 
 </resources>

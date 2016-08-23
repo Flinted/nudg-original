@@ -47,10 +47,9 @@ public abstract class NudgMaster {
         matcher = MY_PATTERN2.matcher(mText);
         while (matcher.find()) {
             String tag = matcher.group(1);
-            mTags.add("#/" + tag);
+//            mTags.add("#/" + tag);
             String dateTag = dateCheck(tag);
             mTags.add(dateTag);
-            Log.d("SystemTag", dateTag);
         }
         if (mTags.size() == 0){
             mTags.add("#noTag");
@@ -93,6 +92,7 @@ public abstract class NudgMaster {
     public void stripTags(String text){
         text = text.replaceAll("(#/?.+?\\b,?)", "");
         mText= text.trim();
+        Log.d("Tags on creation",mTags.toString());
     }
 
     public String dateCheck(String tag){

@@ -4,20 +4,21 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     android:focusableInTouchMode="true">
 
     <SearchView
         android:id="@+id/searcher"
         android:layout_height="60dp"
-        android:layout_alignParentRight="true"
-        android:layout_width="290dp"
+        android:layout_alignParentLeft="true"
+        android:layout_width="300dp"
         android:background="@drawable/boxoutline"
         android:hint="search"
         android:iconifiedByDefault="false"
         />
     <Button
-        android:layout_width="95dp"
+        android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_toLeftOf="@id/searcher"
         style="@style/button"
@@ -25,7 +26,7 @@
         android:text="Home"
         android:textSize="20sp"
         android:id="@+id/button_home"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         />
     <!--<MultiAutoCompleteTextView-->
         <!--android:id="@+id/searcher"-->
@@ -36,9 +37,18 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:hint="Enter tag to filter"-->
         <!--android:background="@color/colorAccent"/>-->
-
+<ScrollView
+    android:layout_width="80dp"
+    android:layout_height="fill_parent"
+    android:layout_below="@id/button_home"
+    android:layout_alignParentRight="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_scroller"
+        android:orientation="vertical">
     <Button
-        android:layout_width="95dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/searcher"
         style="@style/button"
@@ -47,112 +57,121 @@
         android:textSize="10sp"
         android:id="@+id/button_today"
         android:layout_alignParentLeft="true"
+        android:onClick="setSearchFromDefaultButton"
         />
 
     <Button
         style="@style/button"
         android:background="@drawable/button"
-        android:layout_width="95dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/button_today"
         android:text="#/Tomorrow"
         android:textSize="10sp"
         android:id="@+id/button_tomorrow"
         android:layout_alignParentLeft="true"
+        android:onClick="setSearchFromDefaultButton"
         />
 
     <Button
         style="@style/button"
         android:background="@drawable/button"
-        android:layout_width="95dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/button_tomorrow"
         android:text="#/Monday"
         android:textSize="10sp"
         android:id="@+id/button_monday"
         android:layout_alignParentLeft="true"
+        android:onClick="setSearchFromDefaultButton"
         />
 
     <Button
         style="@style/button"
         android:background="@drawable/button"
-        android:layout_width="95dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/button_monday"
         android:text="#/Tuesday"
         android:textSize="10sp"
         android:id="@+id/button_tuesday"
         android:layout_alignParentLeft="true"
+        android:onClick="setSearchFromDefaultButton"
         />
 
     <Button
         style="@style/button"
         android:background="@drawable/button"
-        android:layout_width="95dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/button_tuesday"
         android:text="#/Wednesday"
         android:textSize="10sp"
         android:id="@+id/button_wednesday"
         android:layout_alignParentLeft="true"
+        android:onClick="setSearchFromDefaultButton"
         />
 
     <Button
         style="@style/button"
         android:background="@drawable/button"
-        android:layout_width="95dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/button_wednesday"
         android:text="#/Thursday"
         android:textSize="10sp"
         android:id="@+id/button_thursday"
         android:layout_alignParentLeft="true"
+        android:onClick="setSearchFromDefaultButton"
         />
 
     <Button
         style="@style/button"
         android:background="@drawable/button"
-        android:layout_width="95dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/button_thursday"
         android:text="#/Friday"
         android:textSize="10sp"
         android:id="@+id/button_friday"
         android:layout_alignParentLeft="true"
+        android:onClick="setSearchFromDefaultButton"
         />
 
     <Button
         style="@style/button"
         android:background="@drawable/button"
-        android:layout_width="95dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/button_friday"
         android:text="#/Saturday"
         android:textSize="10sp"
         android:id="@+id/button_saturday"
         android:layout_alignParentLeft="true"
+        android:onClick="setSearchFromDefaultButton"
         />
 
     <Button
         style="@style/button"
         android:background="@drawable/button"
-        android:layout_width="95dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/button_saturday"
         android:text="#/Sunday"
         android:textSize="10sp"
         android:id="@+id/button_sunday"
         android:layout_alignParentLeft="true"
+        android:onClick="setSearchFromDefaultButton"
         />
-
+    </LinearLayout>
+</ScrollView>
     <ListView
         android:id="@android:id/list"
         android:layout_below="@id/searcher"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="0dp"
         android:cacheColorHint="#00000000"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right" />
-
-
 </RelativeLayout>

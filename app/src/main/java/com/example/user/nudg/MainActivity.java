@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity{
     NudgProgram mNudg;
     DatePicker mDate;
     MultiAutoCompleteTextView mAuto;
+    MyListAdapter mAdapter;
 
     @Override
     protected void onRestart(){
@@ -75,10 +77,10 @@ public class MainActivity extends AppCompatActivity{
         mCalendarGo = (Button) findViewById(R.id.calendarGo);
         setAuto(mNudg.getmNudger());
         mWelcome.setText("Welcome back " + mNudg.getUserName());
-        mDate = (DatePicker) findViewById(R.id.datePicker);
+//        mDate = (DatePicker) findViewById(R.id.datePicker);
         mImage = (Button) findViewById(R.id.imageGo);
-        mImageView = (ImageView) findViewById(R.id.thumbnail);
-
+//        mImageView = (ImageView) findViewById(R.id.thumbnail);
+        setTodayList();
         mImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,18 +89,10 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-
         mCalendarGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 calendarGo();
-//                Calendar c = Calendar.getInstance();
-//                int mYear = c.get(Calendar.YEAR);
-//                int mMonth = c.get(Calendar.MONTH);
-//                int mDay = c.get(Calendar.DAY_OF_MONTH);
-//                DatePickerDialog dialog = new DatePickerDialog(MainActivity.this,
-//                        new mDateSetListener(mAuto), mYear, mMonth, mDay);
-//                dialog.show();
             }
         });
 
@@ -106,28 +100,13 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 filterGo();
-//                Intent intent = new Intent(MainActivity.this, FilterActivity.class);
-//                intent.putExtra("user", mNudg.getUserName().toString());
-//                startActivity(intent);
             }
         });
-
-
 
         mText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 newNudgGo();
-//                String nudgData = mAuto.getEditableText().toString();
-//                if (nudgData.equalsIgnoreCase("")){
-//                    toastFail();
-//                    return;
-//                }
-//                mNudg.getmNudger().newEntry(nudgData , "", MainActivity.this );
-//                toastConfirm();
-//                mAuto.setText("");
-//                setAuto(mNudg.getmNudger());
-//                Log.d("New Entry", "now " + mNudg.getmNudger());
             }
         });
     }
@@ -136,7 +115,6 @@ public class MainActivity extends AppCompatActivity{
     public void toastConfirm(){
         String toastMessage = "Nudg: " + mAuto.getText() + " added.";
         Toast.makeText(MainActivity.this,toastMessage,Toast.LENGTH_SHORT).show();
-
     }
 
     public void toastFail(){
@@ -177,12 +155,12 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mImageView.setImageResource(R.mipmap.ic_launcher);
+//        mImageView.setImageResource(R.mipmap.ic_launcher);
         if(resultCode == RESULT_OK){
             if(requestCode == 10){
                 Log.d("hitting", "hitting on return");
                 Bitmap cameraImage=(Bitmap) data.getExtras().get("data");
-                mImageView.setImageBitmap(cameraImage);
+//                mImageView.setImageBitmap(cameraImage);
             }
         }
 
@@ -190,9 +168,7 @@ public class MainActivity extends AppCompatActivity{
 
     public void setAuto (NudgManager nudgManager){
         List<String> stringList = nudgManager.getTags();
-
         AutoSuggestAdapter adapter = new AutoSuggestAdapter(this, android.R.layout.simple_list_item_1, stringList);
-
         mAuto.setAdapter(adapter);
         mAuto.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
         mAuto.setThreshold(1);
@@ -203,14 +179,13 @@ public class MainActivity extends AppCompatActivity{
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog dialog = new DatePickerDialog(MainActivity.this,
-                new mDateSetListener(mAuto), mYear, mMonth, mDay);
+        DatePickerDialog dialog = new DatePickerDialog(MainActivity.this, new mDateSetListener(mAuto), mYear, mMonth, mDay);
         dialog.show();
     }
 
     public void filterGo(){
         Intent intent = new Intent(MainActivity.this, FilterActivity.class);
-        intent.putExtra("user", mNudg.getUserName().toString());
+        intent.putExtra("user", mNudg.getUserName());
         startActivity(intent);
     }
 
@@ -220,10 +195,30 @@ public class MainActivity extends AppCompatActivity{
             toastFail();
             return;
         }
-        mNudg.getmNudger().newEntry(nudgData , "", MainActivity.this );
+        mNudg.getmNudger().newEntry(nudgData, "", MainActivity.this);
         toastConfirm();
         mAuto.setText("");
         setAuto(mNudg.getmNudger());
-        Log.d("New Entry", "now " + mNudg.getmNudger());
+        setTodayList();
+    }
+
+    public void setTodayList(){
+        ArrayList<NudgMaster> data = mNudg.getmNudger().returnTodaysNudgs();
+        mAdapter = new MyListAdapter(MainActivity.this,data);
+        ListView dayList = (ListView) findViewById(R.id.today);
+        Log.d("Todays Tags", data.toString());
+
+        dayList.setAdapter(mAdapter);
+        dayList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                NudgMaster nudg = mAdapter.getItem(position);
+                Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
+                intent.putExtra("tags", nudg.getTags().toString());
+                intent.putExtra("text", nudg.getText());
+                intent.putExtra("note",nudg.getNote().toString());
+                startActivity(intent);
+            }
+        });
     }
 }

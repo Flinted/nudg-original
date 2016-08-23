@@ -4,27 +4,17 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     android:focusableInTouchMode="true">
 
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/icon"
-        android:id="@+id/logo"
-        android:layout_gravity="left"
-        android:layout_marginRight="20dp"
-        />
-
     <TextView
         android:id="@+id/welcomer"
-        android:layout_toRightOf="@+id/logo"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:textSize="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
         />
 
     <MultiAutoCompleteTextView
@@ -32,7 +22,8 @@
         android:layout_below="@id/welcomer"
         android:minHeight="60dp"
         android:textSize="20dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="3dp"
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,34 +68,38 @@
         android:textAlignment="center"
         />
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:id="@+id/todayTitle"
+        android:text="@string/todayTitle"
+        android:layout_below="@id/text"/>
+    <ListView
+        android:id="@+id/today"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_below="@id/todayTitle"
+        android:background="@color/colorAccent"
+        />
+
     <Button
         android:id="@+id/goFilter"
-        android:text="View Nudgs"
+        android:text="View all Nudgs"
         style="@style/button"
         android:background="@drawable/button"
-        android:layout_below="@id/text"
+        android:layout_below="@id/today"
         android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:textAlignment="center"
         />
-    <ImageView
-        android:id="@+id/thumbnail"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_below="@id/goFilter"
-        android:background="@color/colorAccent"
-        android:layout_centerInParent="true"
-        />
-    <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/datePicker"
-        android:visibility="invisible"
-        android:layout_below="@+id/autoComplete"
-        android:layout_centerHorizontal="true" />
+
 
 
 </RelativeLayout>

@@ -96,6 +96,7 @@ public class MyListAdapter extends ArrayAdapter<NudgMaster> implements Filterabl
 
     }
 
+
 }
 
 
