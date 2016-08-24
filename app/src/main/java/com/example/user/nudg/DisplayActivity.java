@@ -1,5 +1,7 @@
 package com.example.user.nudg;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -25,7 +27,6 @@ public class DisplayActivity extends AppCompatActivity{
     NudgProgram mNudgProgram;
     NudgMaster mNudg;
     String mText;
-    String mNote;
     String mTag;
     TextView TextField;
     EditText NoteField;
@@ -143,10 +144,9 @@ public class DisplayActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId() == R.id.menu_clear ){
-            SharedPrefRunner.clear(this,"tags");
-            SharedPrefRunner.clear(this,"nudgs");
 
-            Toast.makeText(DisplayActivity.this, "ALL ITEMS CLEARED", Toast.LENGTH_SHORT).show();
+            AlertWindow alert = new AlertWindow();
+            alert.show(getFragmentManager(),"clearalert");
             return true;
         }
         if(item.getItemId() == R.id.menu_home ){

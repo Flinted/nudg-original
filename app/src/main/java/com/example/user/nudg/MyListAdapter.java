@@ -1,6 +1,7 @@
 package com.example.user.nudg;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,19 @@ public class MyListAdapter extends ArrayAdapter<NudgMaster> implements Filterabl
 
     public MyListAdapter(Context ctx, ArrayList<NudgMaster> data){
         super(ctx,R.layout.searchlistitem,data);
+        dataCheck(data);
         mContext = ctx;
-        mNudgs = data;
-        mFiltered = data;
+        mFiltered = mNudgs;
+    }
+
+    public void dataCheck(ArrayList<NudgMaster> data){
+        if(data == null){
+            mNudgs = new ArrayList<>();
+            Log.d("null", "hit");
+        }else{
+            mNudgs = data;
+            Log.d("notnull", "hit");
+        }
     }
 
     @Override

@@ -20,6 +20,9 @@ import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -27,7 +30,6 @@ import java.util.List;
  * Created by user on 18/08/2016.
  */
 public class MainActivity extends AppCompatActivity{
-//    TextView mWelcome;
     ImageButton mText;
     ImageButton mImage;
     Button mGoFilter;
@@ -39,8 +41,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onRestart(){
         super.onRestart();
-        setAuto(mNudg.getmNudger());
-        setTodayList();
+        setActivity();
     }
 
     @Override
@@ -50,15 +51,12 @@ public class MainActivity extends AppCompatActivity{
 
         mNudg = new NudgProgram(MainActivity.this);
         mNudg.setUser(MainActivity.this, "Chris");
-//        mWelcome = (TextView) findViewById(R.id.welcomer);
         mText = (ImageButton) findViewById(R.id.text);
         mGoFilter = (Button) findViewById(R.id.goFilter);
         mAuto = (MultiAutoCompleteTextView) findViewById(R.id.autoComplete);
         mCalendarGo = (ImageButton) findViewById(R.id.calendarGo);
-        getSupportActionBar().setTitle("Welcome back " + mNudg.getUserName());
+        setActivity();
         mImage = (ImageButton) findViewById(R.id.imageGo);
-        setAuto(mNudg.getmNudger());
-        setTodayList();
         mImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,14 +108,11 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId() == R.id.menu_clear ){
-            SharedPrefRunner.clear(this,"tags");
-            SharedPrefRunner.clear(this,"nudgs");
-
-            Toast.makeText(MainActivity.this, "ALL ITEMS CLEARED", Toast.LENGTH_SHORT).show();
+            AlertWindow alert = new AlertWindow();
+            alert.show(getFragmentManager(), "clearalert");
             return true;
         }
         if(item.getItemId() == R.id.menu_home ){
-
             Toast.makeText(MainActivity.this,"Already Home",Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -142,14 +137,6 @@ public class MainActivity extends AppCompatActivity{
             }
         }
 
-    }
-
-    public void setAuto (NudgManager nudgManager){
-        List<String> stringList = nudgManager.getTags();
-        AutoSuggestAdapter adapter = new AutoSuggestAdapter(this, android.R.layout.simple_list_item_1, stringList);
-        mAuto.setAdapter(adapter);
-        mAuto.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        mAuto.setThreshold(1);
     }
 
     public void calendarGo(){
@@ -180,23 +167,44 @@ public class MainActivity extends AppCompatActivity{
         setTodayList();
     }
 
+    public void setActivity(){
+        getSupportActionBar().setTitle("Welcome back " + mNudg.getUserName());
+        setAuto(mNudg.getmNudger());
+        setTodayList();
+    }
+
+
+    public void setAuto (NudgManager nudgManager){
+        List<String> stringList = nudgManager.getTags();
+        AutoSuggestAdapter adapter = new AutoSuggestAdapter(this, android.R.layout.simple_list_item_1, stringList);
+        mAuto.setAdapter(adapter);
+        mAuto.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        mAuto.setThreshold(1);
+    }
     public void setTodayList(){
         ArrayList<NudgMaster> data = mNudg.getmNudger().returnTodaysNudgs();
-        mAdapter = new MyListAdapter(MainActivity.this,data);
         ListView dayList = (ListView) findViewById(R.id.today);
-        Log.d("Todays Tags", data.toString());
+        TextView placeholder= (TextView) findViewById(R.id.placeholder);
+        if(!data.isEmpty()) {
+            mAdapter = new MyListAdapter(MainActivity.this, data);
+            dayList.setAdapter(mAdapter);
+            dayList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    NudgMaster nudg = mAdapter.getItem(position);
+                    Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
+                    intent.putExtra("tags", nudg.getTags().toString());
+                    intent.putExtra("text", nudg.getText());
+                    intent.putExtra("note", nudg.getNote());
+                    startActivity(intent);
+                }
+            });
+            dayList.setVisibility(View.VISIBLE);
+            placeholder.setVisibility(View.INVISIBLE);
 
-        dayList.setAdapter(mAdapter);
-        dayList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NudgMaster nudg = mAdapter.getItem(position);
-                Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
-                intent.putExtra("tags", nudg.getTags().toString());
-                intent.putExtra("text", nudg.getText());
-                intent.putExtra("note",nudg.getNote());
-                startActivity(intent);
-            }
-        });
+        }else{
+            dayList.setVisibility(View.INVISIBLE);
+            placeholder.setVisibility(View.VISIBLE);
+        }
     }
 }

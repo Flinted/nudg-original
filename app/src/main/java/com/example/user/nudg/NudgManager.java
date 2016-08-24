@@ -22,15 +22,13 @@ import java.util.Locale;
  */
 public class NudgManager {
     private TagManager mTagger;
-    private Archive mArchive;
     private NudgMaster mCurrentNudg;
     private ArrayList<NudgMaster> mNudgs;
     private Gson mGson;
 
-    public NudgManager(TagManager lister, Archive archive, Context context){
+    public NudgManager(TagManager lister, Context context){
        mTagger = lister;
         mGson = new Gson();
-        mArchive = archive;
         checkStored(context);
     }
 
@@ -39,6 +37,10 @@ public class NudgManager {
         ArrayList<String> tags = mCurrentNudg.getTags();
         mTagger.process(tags, context);
         save(context);
+    }
+
+    public int count(){
+        return mNudgs.size();
     }
 
     public void delete(NudgMaster nudg, Context context){
@@ -87,12 +89,8 @@ public class NudgManager {
         if(jsonReturn != null) {
             Type type = new TypeToken<ArrayList<TextNudg>>(){}.getType();
             mNudgs =  mGson.fromJson(jsonReturn, (java.lang.reflect.Type) type);
-
-            for(NudgMaster nudg: mNudgs){
-                Log.d("nudgTag", nudg.getTags().toString());
-            }
         }else{
-            mNudgs = new ArrayList<NudgMaster>();
+            mNudgs = new ArrayList<>();
         }
     }
 
@@ -112,9 +110,6 @@ public class NudgManager {
         return null;
     }
 
-    public void archive(NudgMaster nudg, Context context){
-        mArchive.addToArchive(nudg, context);
-    }
 
     public ArrayList<NudgMaster> returnTodaysNudgs(){
         Calendar calendar = Calendar.getInstance();

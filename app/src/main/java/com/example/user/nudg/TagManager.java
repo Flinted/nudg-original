@@ -1,13 +1,11 @@
 package com.example.user.nudg;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,11 +25,6 @@ public class TagManager {
     public void process(ArrayList<String> newTags, Context context) {
         for (String tag : newTags) {
             processSingleTag(tag);
-//            if (!mTags.containsKey(tag)) {
-//                mTags.put(tag, 1);
-//            } else {
-//                mTags.put(tag, mTags.get(tag) + 1);
-//            }
         }
         Log.d("processing", newTags.toString());
         save(context);
@@ -61,11 +54,6 @@ public class TagManager {
     public void removeTags(ArrayList<String> remtags, Context context) {
         for (String tag : remtags) {
             removeSingleTag(tag);
-//            if (mTags.get(tag) == 1) {
-//                mTags.remove(tag);
-//            } else {
-//                mTags.put(tag, mTags.get(tag) - 1);
-//            }
         }
 
         Log.d("After remTags", mTags.toString());
@@ -79,7 +67,6 @@ public class TagManager {
             mTags.put(tag, mTags.get(tag) - 1);
         }
     }
-
     public void addDays() {
         mTags.put("#/Monday", 1);
         mTags.put("#/Tuesday", 1);

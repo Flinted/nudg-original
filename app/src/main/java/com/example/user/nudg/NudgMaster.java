@@ -1,12 +1,8 @@
 package com.example.user.nudg;
 
-import android.provider.CalendarContract;
 import android.util.Log;
-
-import java.lang.reflect.Array;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,7 +17,6 @@ import java.util.regex.Pattern;
 public abstract class NudgMaster {
     private String mText;
     private String mNote;
-    private boolean mComplete;
     private ArrayList<String> mTags;
     private String mImgLink;
     private String mAudioLink;
@@ -29,7 +24,6 @@ public abstract class NudgMaster {
     public NudgMaster (String text, String notes){
         mText = text;
         mNote = notes;
-        mComplete = false;
         mTags = new ArrayList<>();
         siftForTags();
     }
@@ -65,10 +59,10 @@ public abstract class NudgMaster {
         return returner;
     }
     public void update(String newText, String newNote, String[] newTags){
-        ArrayList<String> tags = new ArrayList<>();
-        for(String tag:newTags){
-            tags.add(tag);
-        }
+        ArrayList<String> tags = new ArrayList<String>(Arrays.asList(newTags));
+//        for(String tag:newTags){
+//            tags.add(tag);
+//        }
 
         updateText(newText);
         updateNote(newNote);
@@ -109,7 +103,6 @@ public abstract class NudgMaster {
     public void stripTags(String text){
         text = text.replaceAll("(#/?.+?\\b,?)", "");
         mText= text.trim();
-        Log.d("Tags on creation",mTags.toString());
     }
 
     public String dateCheck(String tag){
@@ -186,16 +179,5 @@ public abstract class NudgMaster {
         return mNote;
     }
 
-    public boolean getCompleteState(){
-        return mComplete;
-    }
 
-
-    public void toggleComplete(){
-        if(mComplete){
-            mComplete = false;
-        }else{
-            mComplete = true;
-        }
-    }
 }

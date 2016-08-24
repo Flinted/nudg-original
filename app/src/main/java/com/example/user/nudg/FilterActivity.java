@@ -36,17 +36,19 @@ public class FilterActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
+        mNudg = new NudgProgram(FilterActivity.this);
         mList = (ListView) findViewById(android.R.id.list);
         mSearch = (SearchView) findViewById(R.id.searcher);
         mSearch.setQueryHint("Click here to filter Nudgs");
         mSearch.clearFocus();
-        Intent intent = getIntent();
-        mNudg = new NudgProgram(FilterActivity.this);
-        mData = mNudg.getmNudger().getNudgs();
         setButtons();
+        mData = mNudg.getmNudger().getNudgs();
+        Log.d("Data passing", mData.toString());
         mAdapter = new MyListAdapter(FilterActivity.this,mData);
         mList.setAdapter(mAdapter);
+        if(!mData.isEmpty()){
         mAdapter.getFilter().filter("");
+        }
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

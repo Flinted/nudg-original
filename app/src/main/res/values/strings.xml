@@ -4,6 +4,8 @@
     <string name="tag">Tags</string>
     <string name="notes">Notes</string>
     <string name="todayTitle">Today\'s Nudgs</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">DELETE ALL</string>
 
 
 </resources>
