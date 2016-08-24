@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity{
 
     public void setActivity(){
         getSupportActionBar().setTitle("Welcome back " + mNudg.getUserName());
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#b5b5b7"));
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#677077"));
         getSupportActionBar().setBackgroundDrawable(colorDrawable);
         setAuto(mNudg.getmNudger());
         setTodayList();

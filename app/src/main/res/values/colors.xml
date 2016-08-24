@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#b5b5b7</color>
-    <color name="colorPrimaryDark">#677077</color>
-    <color name="colorAccent">#f2b632</color>
+    <color name="colorYellow">#f2b632</color>
+    <color name="colorLightGrey">#b5b5b7</color>
+    <color name="colorDarkGrey">#677077</color>
     <color name="colorText">#383127</color>
     <color name="colorBold">#E37222</color>
-
-    <color name="colorPrimaryTran">#CCb5b5b7</color>
-    <color name="semiTransYellow">#e6f2b632</color>
+    <color name="colorAccent">#f2b632</color>
+    <color name="colorPrimaryTran">#e6f2b632</color>
+    <color name="semiTransYellow">#CCb5b5b7</color>
     <color name="colorAccentTrans">#BFDC5B21</color>
     <color name="darkPurple">#816687</color>
     <color name="lightPurple">#CDB5CD</color>
     <color name="RichBlue">#234da9</color>
     <color name="LightBlue">#326ef2</color>
 </resources>
+
+
+<!--<color name="colorPrimary">#b5b5b7</color>-->
+<!--<color name="colorPrimaryDark">#677077</color>-->
+<!--<color name="colorAccent">#f2b632</color>-->
+<!--<color name="colorText">#383127</color>-->
+<!--<color name="colorBold">#E37222</color>-->
+
+<!--<color name="colorPrimaryTran">#CCb5b5b7</color>-->
+<!--<color name="semiTransYellow">#e6f2b632</color>-->
+<!--<color name="colorAccentTrans">#BFDC5B21</color>-->
+<!--<color name="darkPurple">#816687</color>-->
+<!--<color name="lightPurple">#CDB5CD</color>-->
+<!--<color name="RichBlue">#234da9</color>-->
+<!--<color name="LightBlue">#326ef2</color>-->

@@ -3,11 +3,11 @@
     <item android:state_pressed="true" >
         <shape>
             <solid
-                android:color="@color/colorAccent"
+                android:color="@color/colorDarkGrey"
                 />
             <stroke
                 android:width="4dp"
-                android:color="@color/colorPrimaryDark" />
+                android:color="@color/colorLightGrey" />
             <corners
                 android:radius="0dp"
                 />
@@ -18,13 +18,11 @@
     <item>
         <shape>
             <solid
-                android:color="@color/semiTransYellow"
+                android:color="@color/colorPrimaryTran"
                 />
             <stroke
-                android:dashGap="5px"
-                android:dashWidth="5px"
                 android:width="4dp"
-                android:color="@color/colorPrimaryDark" />
+                android:color="@color/colorDarkGrey" />
             <corners
                 android:radius="0dp"
                 />

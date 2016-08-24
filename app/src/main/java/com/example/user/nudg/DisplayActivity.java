@@ -45,7 +45,7 @@ public class DisplayActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activitynudgdisplay);
         mNudgProgram = new NudgProgram(DisplayActivity.this);
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#b5b5b7"));
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#677077"));
         getSupportActionBar().setBackgroundDrawable(colorDrawable);
         getSupportActionBar().setTitle("Add notes, edit or delete");
 

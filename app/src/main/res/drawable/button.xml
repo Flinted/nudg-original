@@ -3,7 +3,7 @@
     <item android:state_pressed="true" >
         <shape>
             <solid
-                android:color="@color/colorAccent"
+                android:color="@color/colorDarkGrey"
                 />
             <stroke
                 android:width="3dp"

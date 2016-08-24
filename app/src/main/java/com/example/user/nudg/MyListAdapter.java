@@ -1,6 +1,7 @@
 package com.example.user.nudg;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,9 +55,10 @@ public class MyListAdapter extends ArrayAdapter<NudgMaster> implements Filterabl
     public View getView(int position, View convertView,ViewGroup parent){
         View itemView = convertView;
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (itemView == null){
+//        if (itemView == null){
             itemView = inflater.inflate(R.layout.searchlistitem, parent, false);
-        }
+//        }
+
         NudgMaster currentNudg = mNudgs.get(position);
 //
         TextView nudg = (TextView) itemView.findViewById(R.id.item_nudg);
@@ -65,6 +67,9 @@ public class MyListAdapter extends ArrayAdapter<NudgMaster> implements Filterabl
         notes.setText(currentNudg.getNote());
         TextView tags = (TextView) itemView.findViewById(R.id.item_tags);
         tags.setText(currentNudg.getDisplayTags());
+        if(currentNudg.getDisplayTags().contains("#DONE")){
+            itemView.setBackgroundColor(Color.GRAY);
+        }
         return itemView;
     }
 

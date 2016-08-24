@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:background="@drawable/background4"
+    android:background="@color/colorYellow"
     android:focusableInTouchMode="true"
     >
 
@@ -16,10 +16,12 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="3dp"
         android:textAlignment="center"
+        android:textColor="@color/colorYellow"
+        android:textColorHint="@color/colorYellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter your Nudg..."
-        android:background="@drawable/boxoutlineattentiongrab"/>
+        android:background="@drawable/boxoutlinedark"/>
 
     <ImageButton
     android:id="@+id/text"
@@ -75,11 +77,8 @@
         android:layout_height="35dp"
         android:layout_marginTop="20dp"
         android:textSize="25sp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorDarkGrey"
         android:textAlignment="center"
-        android:shadowRadius="5"
-        android:shadowDy="5"
-        android:shadowColor="@color/colorText"
         android:id="@+id/todayTitle"
         android:text="@string/todayTitle"
         android:layout_below="@id/calendarGo"/>
@@ -87,7 +86,7 @@
         android:id="@+id/placeholder"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="270dp"
         android:text="No Nudgs for today : )"
         android:textSize="25sp"
         android:gravity="center"
@@ -103,7 +102,7 @@
         android:id="@+id/today"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="270dp"
         android:paddingTop="5dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
@@ -121,7 +120,6 @@
         android:background="@drawable/button"
         android:layout_below="@id/today"
         android:layout_centerInParent="true"
-        android:layout_marginTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"

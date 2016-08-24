@@ -3,10 +3,10 @@
     <item>
         <shape>
             <solid
-                android:color="@color/semiTransYellow" />
+                android:color="@color/colorDarkGrey" />
             <stroke
                 android:width="2dp"
-                android:color="@color/colorText" />
+                android:color="@color/colorDarkGrey" />
         </shape>
     </item>
 
