@@ -3,10 +3,13 @@ package com.example.user.nudg;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,6 +45,9 @@ public class DisplayActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activitynudgdisplay);
         mNudgProgram = new NudgProgram(DisplayActivity.this);
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#b5b5b7"));
+        getSupportActionBar().setBackgroundDrawable(colorDrawable);
+        getSupportActionBar().setTitle("Add notes, edit or delete");
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -127,7 +133,9 @@ public class DisplayActivity extends AppCompatActivity{
         }else {
             mNudg.addTag("#DONE");
             mNudgProgram.getmNudger().processSingleTag("#DONE", DisplayActivity.this);
-            Toast.makeText(DisplayActivity.this, "Marked Done. filter by #DONE to find all finished Nudgs", Toast.LENGTH_SHORT).show();
+            Toast toast = Toast.makeText(DisplayActivity.this,"Marked Done.\nFilter by #DONE to find all finished Nudgs",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
         }
         mNudgProgram.getmNudger().save(DisplayActivity.this);
         Intent intent = new Intent(DisplayActivity.this, FilterActivity.class);

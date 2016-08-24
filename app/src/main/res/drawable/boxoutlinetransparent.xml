@@ -3,7 +3,7 @@
     <item>
         <shape>
             <solid
-                android:color="@color/colorPrimaryTrans" />
+                android:color="@color/semiTransYellow" />
             <stroke
                 android:width="2dp"
                 android:color="@color/colorText" />

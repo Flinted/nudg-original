@@ -14,14 +14,14 @@
                 android:top="0dp"
                 android:bottom="0dp" />
             <corners
-                android:radius="10dp" />
+                android:radius="0dp" />
         </shape>
     </item>
     <item>
         <shape>
             <solid
-                android:color="@color/colorPrimaryTrans"
-              />
+                android:color="@color/semiTransYellow"
+                />
             <stroke
                 android:width="2dp"
                 android:color="@color/colorText" />
@@ -29,7 +29,7 @@
                 android:top="0dp"
                 android:bottom="0dp" />
             <corners
-                android:radius="10dp" />
+                android:radius="0dp" />
         </shape>
     </item>
 

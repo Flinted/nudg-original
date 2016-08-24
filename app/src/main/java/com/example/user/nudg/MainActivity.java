@@ -3,13 +3,17 @@ package com.example.user.nudg;
 import android.graphics.Bitmap;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -56,6 +60,14 @@ public class MainActivity extends AppCompatActivity{
         mAuto = (MultiAutoCompleteTextView) findViewById(R.id.autoComplete);
         mCalendarGo = (ImageButton) findViewById(R.id.calendarGo);
         setActivity();
+        mAuto.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String newString = mAuto.getText() + "#";
+                    mAuto.setText(newString);
+                return false;
+            }
+        });
         mImage = (ImageButton) findViewById(R.id.imageGo);
         mImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,12 +102,16 @@ public class MainActivity extends AppCompatActivity{
 
     public void toastConfirm(){
         String toastMessage = "Nudg: " + mAuto.getText() + " added.";
-        Toast.makeText(MainActivity.this,toastMessage,Toast.LENGTH_SHORT).show();
+        Toast toast = Toast.makeText(MainActivity.this,toastMessage,Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
     }
 
     public void toastFail(){
         String toastMessage = "No text, Nudg not added.";
-        Toast.makeText(MainActivity.this,toastMessage,Toast.LENGTH_SHORT).show();
+        Toast toast = Toast.makeText(MainActivity.this,toastMessage,Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
     }
 
     @Override
@@ -169,6 +185,8 @@ public class MainActivity extends AppCompatActivity{
 
     public void setActivity(){
         getSupportActionBar().setTitle("Welcome back " + mNudg.getUserName());
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#b5b5b7"));
+        getSupportActionBar().setBackgroundDrawable(colorDrawable);
         setAuto(mNudg.getmNudger());
         setTodayList();
     }

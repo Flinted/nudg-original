@@ -5,6 +5,17 @@
     android:paddingRight="5dp"
     android:background="@drawable/itembox"
     >
+    <TextView
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:id="@+id/item_nudg"
+        android:layout_alignParentTop="true"
+        />
 
     <TextView
         android:layout_width="fill_parent"
@@ -21,23 +32,11 @@
         android:layout_width="fill_parent"
         android:gravity="center_horizontal"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:textAlignment="center"
-        android:id="@+id/item_nudg"
-        android:layout_alignParentTop="true"
-
-        />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:gravity="center_horizontal"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
         android:textAlignment="center"
         android:id="@+id/item_tags"
         android:layout_below="@+id/item_notes"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="7dp"
         />
 </RelativeLayout>

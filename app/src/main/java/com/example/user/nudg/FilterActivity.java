@@ -43,7 +43,6 @@ public class FilterActivity extends ListActivity {
         mSearch.clearFocus();
         setButtons();
         mData = mNudg.getmNudger().getNudgs();
-        Log.d("Data passing", mData.toString());
         mAdapter = new MyListAdapter(FilterActivity.this,mData);
         mList.setAdapter(mAdapter);
         if(!mData.isEmpty()){
