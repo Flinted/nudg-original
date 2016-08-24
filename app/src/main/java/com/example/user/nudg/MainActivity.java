@@ -1,13 +1,8 @@
 package com.example.user.nudg;
 
 import android.graphics.Bitmap;
-import android.graphics.ImageFormat;
-import android.hardware.Camera;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
-import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -17,44 +12,27 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-
-import junit.runner.Version;
-
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import javax.xml.validation.Validator;
-
 /**
  * Created by user on 18/08/2016.
  */
 public class MainActivity extends AppCompatActivity{
-    TextView mWelcome;
-    Button mText;
+//    TextView mWelcome;
+    ImageButton mText;
     ImageButton mImage;
     Button mGoFilter;
     ImageButton mCalendarGo;
-    ImageView mImageView;
     NudgProgram mNudg;
-    DatePicker mDate;
     MultiAutoCompleteTextView mAuto;
     MyListAdapter mAdapter;
 
@@ -72,16 +50,14 @@ public class MainActivity extends AppCompatActivity{
 
         mNudg = new NudgProgram(MainActivity.this);
         mNudg.setUser(MainActivity.this, "Chris");
-        mWelcome = (TextView) findViewById(R.id.welcomer);
-        mText = (Button) findViewById(R.id.text);
+//        mWelcome = (TextView) findViewById(R.id.welcomer);
+        mText = (ImageButton) findViewById(R.id.text);
         mGoFilter = (Button) findViewById(R.id.goFilter);
         mAuto = (MultiAutoCompleteTextView) findViewById(R.id.autoComplete);
         mCalendarGo = (ImageButton) findViewById(R.id.calendarGo);
-        setAuto(mNudg.getmNudger());
-        mWelcome.setText("Welcome back " + mNudg.getUserName());
-//        mDate = (DatePicker) findViewById(R.id.datePicker);
+        getSupportActionBar().setTitle("Welcome back " + mNudg.getUserName());
         mImage = (ImageButton) findViewById(R.id.imageGo);
-//        mImageView = (ImageView) findViewById(R.id.thumbnail);
+        setAuto(mNudg.getmNudger());
         setTodayList();
         mImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,7 +194,7 @@ public class MainActivity extends AppCompatActivity{
                 Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
                 intent.putExtra("tags", nudg.getTags().toString());
                 intent.putExtra("text", nudg.getText());
-                intent.putExtra("note",nudg.getNote().toString());
+                intent.putExtra("note",nudg.getNote());
                 startActivity(intent);
             }
         });

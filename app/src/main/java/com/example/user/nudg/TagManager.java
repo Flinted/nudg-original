@@ -26,15 +26,28 @@ public class TagManager {
 
     public void process(ArrayList<String> newTags, Context context) {
         for (String tag : newTags) {
-            if (!mTags.containsKey(tag)) {
-                mTags.put(tag, 1);
-            } else {
-                mTags.put(tag, mTags.get(tag).intValue() + 1);
-            }
+            processSingleTag(tag);
+//            if (!mTags.containsKey(tag)) {
+//                mTags.put(tag, 1);
+//            } else {
+//                mTags.put(tag, mTags.get(tag) + 1);
+//            }
         }
         Log.d("processing", newTags.toString());
+        save(context);
+    }
+
+    public void save(Context context){
         String json = mGson.toJson(mTags);
         SharedPrefRunner.setStoredText("tags", context, json);
+    }
+
+    public void processSingleTag(String tag){
+        if (!mTags.containsKey(tag)) {
+            mTags.put(tag, 1);
+        } else {
+            mTags.put(tag, mTags.get(tag) + 1);
+        }
     }
 
     public ArrayList<String> getTags() {
@@ -47,16 +60,24 @@ public class TagManager {
 
     public void removeTags(ArrayList<String> remtags, Context context) {
         for (String tag : remtags) {
-            if (mTags.get(tag) == 1) {
-                mTags.remove(tag);
-            } else {
-                mTags.put(tag, mTags.get(tag) - 1);
-            }
+            removeSingleTag(tag);
+//            if (mTags.get(tag) == 1) {
+//                mTags.remove(tag);
+//            } else {
+//                mTags.put(tag, mTags.get(tag) - 1);
+//            }
         }
 
         Log.d("After remTags", mTags.toString());
-        String json = mGson.toJson(mTags);
-        SharedPrefRunner.setStoredText("tags", context, json);
+        save(context);
+    }
+
+    public void removeSingleTag(String tag){
+        if (mTags.get(tag) == 1) {
+            mTags.remove(tag);
+        } else {
+            mTags.put(tag, mTags.get(tag) - 1);
+        }
     }
 
     public void addDays() {

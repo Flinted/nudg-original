@@ -72,6 +72,16 @@ public class NudgManager {
     public void processNewTags(ArrayList<String> newTags, Context context){
         mTagger.process(newTags, context);
     }
+
+    public void processSingleTag(String tag, Context context){
+        mTagger.processSingleTag(tag);
+        mTagger.save(context);
+    }
+
+    public void removeSingleTag(String tag, Context context){
+        mTagger.removeSingleTag(tag);
+        mTagger.save(context);
+    }
     public void checkStored(Context context){
         String jsonReturn = SharedPrefRunner.getStoredText("nudgs", context);
         if(jsonReturn != null) {

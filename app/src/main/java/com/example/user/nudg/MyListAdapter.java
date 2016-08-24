@@ -75,16 +75,27 @@ public class MyListAdapter extends ArrayAdapter<NudgMaster> implements Filterabl
                 ArrayList<NudgMaster> filters = new ArrayList<>();
 
                 for(int i=0; i<mFiltered.size(); i++){
+                    if(!mFiltered.get(i).getComparisonTags().toUpperCase().contains("#DONE")){
                     if(mFiltered.get(i).getComparisonTags().toUpperCase().contains(constraint)){
+
+                        filters.add(mFiltered.get(i));
+                    }
+                }else if("#DONE".contains(constraint)){
                         filters.add(mFiltered.get(i));
                     }
                 }
+
                 results.count = filters.size();
                 results.values = filters;
             }else{
-                results.count = mFiltered.size();
-                results.values = mFiltered;
-            }
+                ArrayList<NudgMaster> filters = new ArrayList<>();
+                for(int i=0; i<mFiltered.size(); i++){
+                    if(!mFiltered.get(i).getComparisonTags().toUpperCase().contains("#DONE")) {
+                        filters.add(mFiltered.get(i));
+                    }
+                        results.count = filters.size();
+                        results.values = filters;
+            }}
             return results;
         }
 

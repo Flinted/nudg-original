@@ -119,14 +119,16 @@ public class DisplayActivity extends AppCompatActivity{
     }
 
     public void markDone(){
-        NudgMaster toStore = mNudg;
-        mNudgProgram.getmNudger().delete(mNudg, DisplayActivity.this);
-
-        ArrayList<String> tags = toStore.getTags();
-        tags.add("#DONE!");
-        toStore.updateTags(tags);
-
-        mNudgProgram.getmNudger().archive(toStore, DisplayActivity.this);
+        if(mNudg.getComparisonTags().contains("#DONE")){
+            mNudg.removeTag("#DONE");
+            mNudgProgram.getmNudger().removeSingleTag("#DONE", DisplayActivity.this);
+            Toast.makeText(DisplayActivity.this, "#DONE tag removed", Toast.LENGTH_SHORT).show();
+        }else {
+            mNudg.addTag("#DONE");
+            mNudgProgram.getmNudger().processSingleTag("#DONE", DisplayActivity.this);
+            Toast.makeText(DisplayActivity.this, "Marked Done. filter by #DONE to find all finished Nudgs", Toast.LENGTH_SHORT).show();
+        }
+        mNudgProgram.getmNudger().save(DisplayActivity.this);
         Intent intent = new Intent(DisplayActivity.this, FilterActivity.class);
         startActivity(intent);
     }

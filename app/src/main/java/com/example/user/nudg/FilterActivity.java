@@ -46,6 +46,7 @@ public class FilterActivity extends ListActivity {
         setButtons();
         mAdapter = new MyListAdapter(FilterActivity.this,mData);
         mList.setAdapter(mAdapter);
+        mAdapter.getFilter().filter("");
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

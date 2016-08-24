@@ -75,7 +75,7 @@
             style="@style/button"
             android:layout_marginBottom="20dp"
             android:background="@drawable/button"
-            android:text="Mark as Done!"
+            android:text="Toggle Done"
             android:id="@+id/button_done"
             android:layout_below="@id/NoteField"
             />

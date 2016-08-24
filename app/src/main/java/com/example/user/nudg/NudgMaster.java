@@ -75,6 +75,18 @@ public abstract class NudgMaster {
         updateTags(tags);
     }
 
+    public void addTag(String tag){
+        mTags.add(tag);
+    }
+
+    public void removeTag(String remtag) {
+        for(String tag:mTags) {
+            if (tag.equalsIgnoreCase(remtag)) {
+                mTags.remove(tag);
+            }
+        }
+    }
+
     public void updateText(String newText){
         mText = newText;
     }
