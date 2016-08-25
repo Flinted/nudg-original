@@ -32,7 +32,7 @@ import java.util.Calendar;
 
             mInput.setText(new StringBuilder()
                     // Month is 0 based so add 1
-                    .append(mInput.getText().toString()).append("#").append(mDay).append(months[mMonth]).append(","));
+                    .append("#").append(mDay).append(months[mMonth]).append(",").append(mInput.getText().toString()));
             Log.d("datePicker", mInput.getText().toString());
         }
 
