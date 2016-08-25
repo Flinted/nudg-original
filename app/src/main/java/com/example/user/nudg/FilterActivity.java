@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -56,23 +57,45 @@ public class FilterActivity extends ListActivity {
                 Intent intent = new Intent(FilterActivity.this, DisplayActivity.class);
                 intent.putExtra("tags", nudg.getTags().toString());
                 intent.putExtra("text", nudg.getText());
-                intent.putExtra("note",nudg.getNote().toString());
+                intent.putExtra("note", nudg.getNote().toString());
                 startActivity(intent);
             }
         });
 
-        mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String constraint) {
-                mAdapter.getFilter().filter(constraint);
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                NudgMaster nudg = mAdapter.getItem(position);
+                if (nudg.getComparisonTags().contains("#DONE")) {
+                    nudg.removeTag("#DONE");
+                    mNudg.getmNudger().removeSingleTag("#DONE", FilterActivity.this);
+                    Toast.makeText(FilterActivity.this, "#DONE tag removed", Toast.LENGTH_SHORT).show();
+                } else {
+                    nudg.addTag("#DONE");
+                    mNudg.getmNudger().processSingleTag("#DONE", FilterActivity.this);
+                    Toast toast = Toast.makeText(FilterActivity.this, "Marked Done.\nFilter by #DONE to find all finished Nudgs", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                mNudg.getmNudger().save(FilterActivity.this);
+                Intent intent = new Intent(FilterActivity.this, FilterActivity.class);
+                startActivity(intent);
                 return false;
             }
         });
+
+                mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String constraint) {
+                        mAdapter.getFilter().filter(constraint);
+                        return false;
+                    }
+                });
     }
 
 

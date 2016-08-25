@@ -56,6 +56,15 @@ public class DisplayActivity extends AppCompatActivity{
         mNudg = mNudgProgram.getmNudger().findNudg(mText, mTag);
         setFields();
         setButtons();
+
+        TagField.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String newString = TagField.getText() + "#";
+                TagField.setText(newString);
+                return false;
+            }
+        });
     }
 
     public void setFields(){
