@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">NUDG</string>
-    <string name="nudg">Nudg</string>
-    <string name="tag">Tags</string>
-    <string name="notes">Notes</string>
-    <string name="todayTitle">Today\'s Nudgs</string>
-    <string name="cancel">Cancel</string>
+    <string name="app_name">nudg</string>
+    <string name="nudg">nudg</string>
+    <string name="tag">tags</string>
+    <string name="notes">notes</string>
+    <string name="todayTitle">today\'s nudgs</string>
+    <string name="cancel">cancel</string>
     <string name="ok">DELETE ALL</string>
 
 

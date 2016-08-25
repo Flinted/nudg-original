@@ -43,6 +43,9 @@ public class NudgManager {
         return mNudgs.size();
     }
 
+    public int getCountofTag(String tag){
+        return mTagger.getCountofTag(tag);
+    }
     public void delete(NudgMaster nudg, Context context){
         mTagger.removeTags(nudg.getTags(), context);
         mNudgs.remove(nudg);

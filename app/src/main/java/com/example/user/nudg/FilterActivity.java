@@ -40,7 +40,7 @@ public class FilterActivity extends ListActivity {
         mNudg = new NudgProgram(FilterActivity.this);
         mList = (ListView) findViewById(android.R.id.list);
         mSearch = (SearchView) findViewById(R.id.searcher);
-        mSearch.setQueryHint("Click here to filter Nudgs");
+        mSearch.setQueryHint("click here to filter nudgs");
         mSearch.clearFocus();
         setButtons();
         mData = mNudg.getmNudger().getNudgs();
@@ -98,7 +98,10 @@ public class FilterActivity extends ListActivity {
             Button btn = new Button(this);
             btn.setId(i);
             final int id_ = btn.getId();
-            btn.setText(mTags.get(i));
+            String tag = mTags.get(i);
+            String buttonText = tag + " ("+mNudg.getmNudger().getCountofTag(tag) + ")";
+            btn.setText(buttonText);
+//            btn.setText(mTags.get(i));
             btn.setTextSize(10);
 
             btn.setBackgroundResource(R.drawable.button);
@@ -115,7 +118,12 @@ public class FilterActivity extends ListActivity {
     public void setSearchFromButton(View view){
         Button button = (Button) view;
         String tag = button.getText().toString();
-        mSearch.setQuery(tag, true);
+        String cutTag = tag;
+        int spacePos = tag.indexOf(" ");
+        if (spacePos > 0) {
+            cutTag= tag.substring(0, spacePos);
+        }
+        mSearch.setQuery(cutTag, true);
     }
 
     public void setSearchFromDefaultButton(View view){

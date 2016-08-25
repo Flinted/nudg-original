@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:background="@color/colorYellow"
+    android:background="@drawable/gradient"
     android:focusableInTouchMode="true"
     >
 
@@ -20,7 +20,7 @@
         android:textColorHint="@color/colorYellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your Nudg..."
+        android:hint="enter your nudg..."
         android:background="@drawable/boxoutlinedark"/>
 
     <ImageButton
@@ -87,7 +87,7 @@
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="270dp"
-        android:text="No Nudgs for today : )"
+        android:text="no nudgs for today : )"
         android:textSize="25sp"
         android:gravity="center"
         android:paddingTop="5dp"
@@ -115,7 +115,7 @@
 
     <Button
         android:id="@+id/goFilter"
-        android:text="View all Nudgs"
+        android:text="view all nudgs"
         style="@style/button"
         android:background="@drawable/button"
         android:layout_below="@id/today"

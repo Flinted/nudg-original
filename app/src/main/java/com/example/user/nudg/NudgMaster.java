@@ -74,9 +74,15 @@ public abstract class NudgMaster {
     }
 
     public void removeTag(String remtag) {
-        for(String tag:mTags) {
-            if (tag.equalsIgnoreCase(remtag)) {
-                mTags.remove(tag);
+        int toRemove = 10000;
+        for(int i = 0; i<mTags.size();i++) {
+            if (mTags.get(i).equalsIgnoreCase(remtag)) {
+                toRemove = i;
+                Log.d("rem", mTags.toString());
+            }
+            if(toRemove != 10000){
+                mTags.remove(i);
+
             }
         }
     }

@@ -10,7 +10,7 @@
     <color name="semiTransYellow">#CCb5b5b7</color>
     <color name="colorAccentTrans">#BFDC5B21</color>
     <color name="darkPurple">#816687</color>
-    <color name="lightPurple">#CDB5CD</color>
+    <color name="colorYellowDark">#e3a00e</color>
     <color name="RichBlue">#234da9</color>
     <color name="LightBlue">#326ef2</color>
 </resources>

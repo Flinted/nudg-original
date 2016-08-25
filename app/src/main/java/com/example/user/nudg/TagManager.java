@@ -30,6 +30,10 @@ public class TagManager {
         save(context);
     }
 
+    public int getCountofTag(String tag){
+        return mTags.get(tag);
+    }
+
     public void save(Context context){
         String json = mGson.toJson(mTags);
         SharedPrefRunner.setStoredText("tags", context, json);
